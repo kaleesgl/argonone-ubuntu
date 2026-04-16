@@ -1,0 +1,17 @@
+[Unit]
+Description=Argon One Fan and Button Service
+Wants=dev-i2c-1.device
+After=local-fs.target systemd-modules-load.service dev-i2c-1.device
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=5
+ExecStart=/usr/bin/python3 /etc/argon/argononed.py
+StandardOutput=journal
+StandardError=journal
+TimeoutStopSec=15
+KillMode=mixed
+
+[Install]
+WantedBy=multi-user.target
